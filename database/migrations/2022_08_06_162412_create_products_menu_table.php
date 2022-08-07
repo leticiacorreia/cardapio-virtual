@@ -17,13 +17,12 @@ return new class extends Migration
             $table->id();
             //criando chave estrangeira para tabela de menus
             $table->foreignId('menu_id')
-            ->nullable()
-            ->constrained('menus');
+              ->constrained('menus')
+              ->cascadeOnDelete();
             //criando chave estrangeira para tabela de products
             $table->foreignId('product_id')
-              ->nullable()
-              ->constrained('products');
-
+              ->constrained('products')
+              ->cascadeOnDelete();
         });
     }
 

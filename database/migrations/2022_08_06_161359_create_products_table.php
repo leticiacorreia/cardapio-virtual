@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->unsignedInteger('price_cents')->nullable();
-            $table->boolean('is_avaiable')->nullable();
-
+            $table->boolean('is_available')->nullable();
+            $table->foreignId('establishment_id')
+              ->constrained('establishments')
+              ->cascadeOnDelete();
             $table->timestamps();
         });
     }

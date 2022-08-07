@@ -13,8 +13,14 @@ class Order extends Model
       'table_number',
       'status',
       'total_cents',
-      'menu_id'
+      'menu_id',
+      'establishment_id',
     ];
+
+    public function establishment()
+    {
+        return $this->belongsTo(Establishment::class);
+    }
 
     public function menu()
     {
@@ -23,6 +29,7 @@ class Order extends Model
 
     public function products()
     {
-      return $this->belongsToMany(Product::class)->withPivot(['subtotal_cents', 'quantity']);
+      return $this->belongsToMany(Product::class)
+        ->withPivot(['subtotal_cents', 'quantity']);
     }
 }

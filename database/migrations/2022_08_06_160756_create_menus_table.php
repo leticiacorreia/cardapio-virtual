@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->boolean('is_active');
             $table->foreignId('establishment_id')
-              ->nullable()
-              ->constrained('establishments');
+              ->constrained('establishments')
+              ->cascadeOnDelete();
 
             $table->timestamps();
         });

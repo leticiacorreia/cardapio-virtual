@@ -13,13 +13,19 @@ class Product extends Model
       'name',
       'description',
       'price',
-      'is_avaiable',
+      'is_available',
+      'establishment_id',
     ];
 
     protected $casts = [
-      'is_avaiable' => 'boolean',
+      'is_available' => 'boolean',
     ];
 
+    public function establishment()
+    {
+        return $this->belongsTo(Establishment::class);
+    }
+    
     public function menus()
     {
         return $this->belongsToMany(Menu::class);
@@ -27,6 +33,7 @@ class Product extends Model
 
     public function orders()
     {
-      return $this->belongsToMany(Order::class)->withPivot(['subtotal_cents', 'quantity']);
+      return $this->belongsToMany(Order::class)
+        ->withPivot(['subtotal_cents', 'quantity']);
     }
 }

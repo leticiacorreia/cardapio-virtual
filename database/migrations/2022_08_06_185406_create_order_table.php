@@ -15,13 +15,21 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('table_number')->nullable();
-            $table->string('status')->nullable();
-            $table->unsignedInteger('total_cents')->nullable();
+            $table->string('table_number')
+              ->nullable();
+            $table->string('status')
+              ->nullable();
+            $table->unsignedInteger('total_cents')
+              ->nullable();
 
             $table->foreignId('menu_id')
               ->nullable()
-              ->constrained('menus');
+              ->constrained('menus')
+              ->nullOnDelete();
+
+            $table->foreignId('establishment_id')
+              ->constrained('establishments')
+              ->cascadeOnDelete();
 
             $table->timestamps();
         });

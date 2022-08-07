@@ -19,12 +19,12 @@ return new class extends Migration
             $table->unsignedInteger('subtotal_cents')->default(0);
 
             $table->foreignId('product_id')
-              ->nullable()
-              ->constrained('products');
+              ->constrained('products')
+              ->cascadeOnDelete();
 
             $table->foreignId('order_id')
-              ->nullable()
-              ->constrained('orders');
+              ->constrained('orders')
+              ->cascadeOnDelete();
 
             $table->timestamps();
         });
