@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products_menu', function (Blueprint $table) {
+        Schema::create('menu_product', function (Blueprint $table) {
             $table->id();
             //criando chave estrangeira para tabela de menus
             $table->foreignId('menu_id')
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products_menu');
+        Schema::dropIfExists('menu_product');
     }
 };

@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->float('price')->nullable();
+            $table->unsignedInteger('price_cents')->nullable();
             $table->boolean('is_avaiable')->nullable();
-            
+
             $table->timestamps();
         });
     }
