@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Establishment::class);
     }
+
+    public function isManager()
+    {
+      return $this->type === 'manager';
+    }
 }

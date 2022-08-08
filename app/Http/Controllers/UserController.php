@@ -14,7 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::where('type', 'employee')
+          ->where('establishment_id', \Auth::user()->establishment_id)
+          ->paginate();
+
+        return view('users.index', ['users'=> $users]);
     }
 
     /**
@@ -24,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -35,7 +39,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['password'] = \Hash::make($data['password']);
+        $data['establishment_id'] = \Auth::user()->establishment_id;
+
+        User::create($data);
+        return redirect()->route('user.index');
     }
 
     /**
@@ -46,7 +55,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return $user;
+        return view('users.show', ['user'=>$user]);
     }
 
     /**
@@ -57,7 +66,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit', ['user'=> $user]);
     }
 
     /**
@@ -69,9 +78,16 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
-    }
+        $data = $request->all();
+        if ($data['password'] === null) {
+          unset($data['password']);
+        } else {
+          $data['password'] = \Hash::make($data['password']);
+        }
+        $user->update($data);
 
+        return redirect()->route('user.show', $user);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -80,6 +96,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('user.index');
     }
 }
