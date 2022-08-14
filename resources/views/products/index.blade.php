@@ -84,7 +84,7 @@
           <tr>
             <td>{{$product->name}}</td>
             <td>{{$product->description}}</td>
-            <td>{{$product->price_cents}}</td>
+            <td>R$ {{number_format($product->price_cents/100, 2, ',', '.')}}</td>
             <td>
               @if($product->available()) Disponível @else Indisponível @endif
 

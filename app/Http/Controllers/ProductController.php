@@ -41,6 +41,9 @@ class ProductController extends Controller
         $data = $request->all();
         $data['establishment_id'] = \Auth::user()->establishment_id;
 
+        //formatando preço para centavos
+        $data['price_cents'] = (int)($data['price'] * 100);
+
         //salvando imagem em disco...
         $product = Product::create($data);
 
@@ -91,6 +94,9 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $data = $request->all();
+
+        //transforma o preço em centavos.
+        $data['price_cents'] = (int)($data['price'] * 100);
 
         if($request->hasFile('image')) {
           $imageFile = $request->file('image');
