@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="bg-light px-4 py-4">
-  <div class="d-flex mb-4 justify-content-between">
-    <h1>Editar Funcionário</h1>
+  <h1>Editar Funcionário</h1>
+  <div class="d-flex mb-4 justify-content-start">
     <form method="POST" action="{{route('user.update', $user->id)}}">
       @csrf
       @method('PUT')
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="d-flex flex-row gap-2">
-        <div class="w-50 mb-3">
+        <div class="w-75 mb-3">
           <label for="select_type" class="form-label">Tipo :</label>
           <select id="select_type" name="type" class="form-select" aria-label="funcionário">
             <option value="manager" @if($user->isManager()) selected @endif>Gerente</option>
@@ -45,11 +45,14 @@
           </select>
         </div>
       </div>
-      <div class="d-flex flex-row justify-content-start">
+      <div class="d-flex flex-row justify-content-start gap-2">
         <button class="btn btn-primary" type="submit">
           <i class="bi bi-clipboard-plus"></i>
             Alterar
         </button>
+        <a href="{{route('user.index')}}" class="btn btn-outline-primary">
+          Voltar
+        </a>
       </div>
     </form>
   </div>

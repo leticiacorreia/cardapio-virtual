@@ -12,7 +12,7 @@ class Product extends Model
     protected $fillable = [
       'name',
       'description',
-      'price',
+      'price_cents',
       'is_available',
       'establishment_id',
     ];
@@ -25,7 +25,7 @@ class Product extends Model
     {
         return $this->belongsTo(Establishment::class);
     }
-    
+
     public function menus()
     {
         return $this->belongsToMany(Menu::class);
@@ -35,5 +35,10 @@ class Product extends Model
     {
       return $this->belongsToMany(Order::class)
         ->withPivot(['subtotal_cents', 'quantity']);
+    }
+
+    public function available()
+    {
+        return $this->is_available == 1;
     }
 }
