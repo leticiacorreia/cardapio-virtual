@@ -18,7 +18,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form method="POST" action="{{route('product.store')}}">
+              <form method="POST" action="{{route('product.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="d-flex flex-row gap-2">
 
@@ -28,10 +28,9 @@
                   </div>
                   <div class="mb-3 w-50">
                     <label for="price" class="form-label">Preço</label>
-                    <input type="text" class="form-control" id="price" name="price_cents" placeholder="Ex: R$12,99">
+                    <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Ex: R$12,99">
                   </div>
                 </div>
-
 
                 <div class="mb-3">
                   <label for="description" class="form-label">Descrição</label>
@@ -48,7 +47,7 @@
                   </div>
                   <div class="mb-3 w-50">
                     <label for="image" class="form-label">Imagem</label>
-                    <input type="file" class="form-control" accept="image/jpeg">
+                    <input type="file" name="image" class="form-control" accept="image/jpeg">
                   </div>
 
                 </div>
@@ -87,11 +86,9 @@
             <td>{{$product->description}}</td>
             <td>{{$product->price_cents}}</td>
             <td>
-              <select class="form-select" name="is_available">
-                <option value="available" @if($product->available() == 1) selected @endif>Disponível</option>
-                <option value="unavailable" @if($product->available() == 0) selected @endif>Indisponível</option>
-              </select>
-              <td><img src="https://picsum.photos/60/50" width="60" height="50" alt="espetinho"></td>
+              @if($product->available()) Disponível @else Indisponível @endif
+
+              <td><img src="{{$product->imageUrl()}}" width="60" height="50" alt="espetinho"></td>
             </td>
             <td colspan="2" class="d-flex flex-row gap-1">
               <a href="{{route('product.edit', $product->id)}}" class="btn btn-outline-primary">

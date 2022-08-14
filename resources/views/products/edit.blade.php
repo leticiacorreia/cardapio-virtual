@@ -5,7 +5,7 @@
   <p class="fs-6 text-muted">Você está visualizando o produto:
   <strong>{{$product->description}}</strong></p>
 
-  <form method="POST" action="{{route('product.update', $product->id)}}">
+  <form method="POST" action="{{route('product.update', $product->id)}}" enctype="multipart/form-data">
     @method('put')
     @csrf
     <div class="mb-3">
@@ -17,15 +17,23 @@
       <textarea class="form-control" id="description" name="description">{{$product->description}}</textarea>
     </div>
     <div class="mb-3">
-      <label for="ingredients" class="form-label">Preço</label>
-      <input type="text" class="form-control" id="price_cents" name="price_cents" value="{{$product->price_cents}}">
+      <label for="price_cents" class="form-label">Preço</label>
+      <input type="text" class="form-control" id="price_cents" name="price" value="{{$product->price_cents}}">
     </div>
 
-    <label for="isAvailable" class="form-label">Disponibilidade</label>
-    <select class="form-select" aria-label="Disponibilidade do prato" name="is_available" id="isAvailable">
-      <option value="1" @if($product->is_available)selected @endif>Disponível</option>
-      <option value="0" @if(!($product->is_available)) selected @endif >Indisponível</option>
-    </select>
+    <div class="d-flex flex-row gap-2">
+      <div class="mb-3 w-50">
+        <label for="isAvailable" class="form-label">Disponibilidade</label>
+        <select class="form-select" aria-label="Disponibilidade do prato" name="is_available" id="isAvailable">
+          <option value="1" @if($product->is_available)selected @endif>Disponível</option>
+          <option value="0" @if(!($product->is_available)) selected @endif >Indisponível</option>
+        </select>
+      </div>
+      <div class="mb-3 w-50">
+        <label for="image" class="form-label">Imagem</label>
+        <input type="file" name="image" class="form-control" accept="image/jpeg">
+      </div>
+    </div>
     <div class="d-flex py-4 justify-content-between">
       <a href="{{route('product.index')}}" class="btn btn-light">
         <i class="bi bi-arrow-left me-1"></i>

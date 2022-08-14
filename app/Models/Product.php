@@ -15,6 +15,7 @@ class Product extends Model
       'price_cents',
       'is_available',
       'establishment_id',
+      'image_path',
     ];
 
     protected $casts = [
@@ -40,5 +41,10 @@ class Product extends Model
     public function available()
     {
         return $this->is_available == 1;
+    }
+
+    public function imageUrl()
+    {
+        return asset('/storage/'.$this->image_path);
     }
 }

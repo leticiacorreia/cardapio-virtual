@@ -41,7 +41,20 @@ class ProductController extends Controller
         $data = $request->all();
         $data['establishment_id'] = \Auth::user()->establishment_id;
 
-        Product::create($data);
+        //salvando imagem em disco...
+        $product = Product::create($data);
+
+        if($request->hasFile('image')) {
+          $imageFile = $request->file('image');
+
+          $product->update([
+            'image_path' =>  $imageFile->storeAs(
+              "images/products/$product->id",
+              'image.jpg',
+              'public',
+            )
+          ]);
+        }
 
         return redirect()->route('product.index');
     }
@@ -78,6 +91,16 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $data = $request->all();
+
+        if($request->hasFile('image')) {
+          $imageFile = $request->file('image');
+
+          $data['image_path'] = $imageFile->storeAs(
+            "images/products/$product->id",
+            'image.jpg',
+            'public'
+          );
+        }
         $product->update($data);
 
         return redirect()->route('product.show', $product);
