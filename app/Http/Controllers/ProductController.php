@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
+
 
 class ProductController extends Controller
 {
@@ -27,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $product = new Product();
+        return view('products.create', ['product'=>$product]);
     }
 
     /**
@@ -36,9 +39,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['establishment_id'] = \Auth::user()->establishment_id;
 
         //formatando preço para centavos
@@ -91,9 +94,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         //transforma o preço em centavos.
         $data['price_cents'] = (int)($data['price'] * 100);

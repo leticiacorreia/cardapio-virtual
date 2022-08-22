@@ -12,7 +12,6 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -26,8 +25,8 @@
     <div class="bg-primary">
       <nav class="navbar navbar-expand-lg container navbar-dark ">
         <div class="container-fluid">
-          <a href="#" class="d-flex align-items-center gap-1 text-light text-decoration-none">
-            <i class="bi bi-journal-bookmark"></i>
+          <a href="/" class="d-flex align-items-center gap-2 text-light text-decoration-none">
+            <i class="bi bi-journal-bookmark mr-2"></i>
             <strong class="fs-4">Meu Cardápio</strong>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +63,5 @@
         @yield('content')
     </main>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
