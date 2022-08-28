@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\MenuRequest;
 use App\Models\Menu;
 
 class MenuController extends Controller
@@ -14,7 +15,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $menus = Menu::orderBy('updated_at', 'desc')->paginate();
+        return view('menus.index', ['menus'=> $menus]);
     }
 
     /**
@@ -24,7 +26,8 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        $menu = new Menu();
+        return view('menus.create', ['menu'=> $menu]);
     }
 
     /**
@@ -33,9 +36,16 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $data['establishment_id'] = \Auth::user()->establishment_id;
+        $data['is_active'] = ($data['is_active'] ?? '') == 'on';
+
+        Menu::create($data);
+
+        return redirect()->route('menu.index');
     }
 
     /**
@@ -57,7 +67,7 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        //
+        return view('menus.edit', ['menu' => $menu]);
     }
 
     /**
@@ -67,9 +77,15 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu)
+    public function update(MenuRequest $request, Menu $menu)
     {
-        //
+        $data = $request->validated();
+
+        $data['is_active'] = ($data['is_active'] ?? '') == 'on';
+
+        $menu->update($data);
+
+        return redirect()->route('menu.show', $menu->id);
     }
 
     /**
@@ -80,6 +96,7 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        $menu->delete();
+        return redirect()->route('menu.index');
     }
 }
