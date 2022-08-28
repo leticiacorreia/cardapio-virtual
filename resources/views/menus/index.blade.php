@@ -30,6 +30,10 @@
             <td>{{$menu->created_at}}</td>
             <td>{{$menu->updated_at}}</td>
             <td class="d-flex flex-row gap-1">
+              <a href="{{route('menu.show', $menu->id)}}" class="btn btn-outline-primary">
+                <i class="bi bi-search"></i>
+              </a>
+
               <a href="{{route('menu.edit', $menu->id)}}" class="btn btn-outline-primary">
                 <i class="bi bi-pencil-fill"></i>
               </a>
