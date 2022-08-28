@@ -47,7 +47,7 @@
                   <a class="nav-link active" href="{{route('product.index')}}">Produtos</a>
                   <a class="nav-link" href="{{route('order.index')}}">Ver Pedidos</a>
                   <a class="nav-link" href="{{route('user.index')}}">Funcionários</a>
-                  <a class="nav-link" href="{{route('establishment.show', \Auth::user()->establishment_id)}}">Dados da Empresa</a>
+                  <a class="nav-link" href="{{route('establishment.edit', \Auth::user()->establishment_id)}}">Dados da Empresa</a>
 
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                       @csrf

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 
 @section('content')
 <div class="container">
@@ -58,6 +58,43 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+                        <hr>
+                        <h5>Dados da Empresa</h5>
+                        <div class="row mb-3">
+                            <label for="trading_name" class="col-md-4 col-form-label text-md-end">{{ __('Trading_name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="trading_name" type="text" class="form-control" name="trading_name" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="company_name" class="col-md-4 col-form-label text-md-end">{{ __('Company_name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="company_name" type="text" class="form-control" name="company_name" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Phone_Company') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="text" class="form-control" name="phone" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Address_company') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="address" type="text" class="form-control" name="address" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="cnpj" class="col-md-4 col-form-label text-md-end">{{ __('CNPJ') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="cnpj" type="text" class="form-control" name="cnpj" required>
                             </div>
                         </div>
 
