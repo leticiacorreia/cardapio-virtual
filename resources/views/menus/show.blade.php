@@ -9,6 +9,11 @@
     <li class="list-group-item"><strong>Status: </strong>{{$menu->is_active ? 'Ativo' : 'Inativo'}}</li>
   </ul>
 </div>
+<div class="">
+  <img src="https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl={{urlencode(route('menu.public.show', $menu->id))}}" >
+  <h5>Link Compartilhável</h5>
+  <a href="{{route('menu.public.show', $menu->id)}}">{{route('menu.public.show', $menu->id)}}</a>
+</div>
 <div class="d-flex flex-column">
   <h3>Produtos do Cardápio</h3>
   <form action="{{route('menu.product.store', $menu->id)}}" method="post">

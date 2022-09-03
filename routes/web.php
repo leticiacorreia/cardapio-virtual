@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/cardapio/{menu}', [App\Http\Controllers\MenuController::class, 'showPublic'])->name('menu.public.show');
 
 Route::middleware('auth')->group(function () {
   Route::resource('user', App\Http\Controllers\UserController::class);
